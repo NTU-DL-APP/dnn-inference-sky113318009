@@ -8,13 +8,16 @@ def relu(x):
 
 def softmax(x):
     if x.ndim == 1:
+        # 適用於單一樣本輸入，例如 [2.0, 1.0, 0.1]
         e_x = np.exp(x - np.max(x))
         return e_x / np.sum(e_x)
     elif x.ndim == 2:
+        # 適用於批次輸入，例如 [[2.0, 1.0, 0.1], [...], ...]
         e_x = np.exp(x - np.max(x, axis=1, keepdims=True))
         return e_x / np.sum(e_x, axis=1, keepdims=True)
     else:
-        raise ValueError("softmax input must be 1D or 2D")
+        raise ValueError("Input to softmax must be 1D or 2D")
+
 
 
 # === Flatten ===
